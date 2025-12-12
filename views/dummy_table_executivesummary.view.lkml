@@ -97,6 +97,19 @@ view: dummy_table_executivesummary {
     type: number
     sql: ${TABLE}.year ;;
   }
+  measure: total_spend_tv_digital {
+    type: sum
+    sql: COALESCE(${tv_spends_inr_cr}, 0)
+      + COALESCE(${digital_spends_inr_cr}, 0) ;;
+    value_format_name: "decimal_2"
+  }
+  measure: total_impressions_tv_digital {
+    type: sum
+    sql: COALESCE(${tv_impressions}, 0)
+      + COALESCE(${digital_impressions}, 0) ;;
+    value_format_name: "decimal_2"
+  }
+
   measure: count {
     type: count
   }
