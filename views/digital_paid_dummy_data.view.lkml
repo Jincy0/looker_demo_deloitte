@@ -85,21 +85,23 @@ view: digital_paid_dummy_data {
 
 
 
+
   measure: selected_metric {
     type: number
     sql:
     CASE
-      WHEN {{ metric_selector._parameter_value | sql_quote }} = 'SPENDS'               THEN ${spends_m}
-      WHEN {{ metric_selector._parameter_value | sql_quote }} = 'IMPRESSIONS'          THEN ${impressions_m}
-      WHEN {{ metric_selector._parameter_value | sql_quote }} = 'CLICKS'               THEN ${clicks_m}
-      WHEN {{ metric_selector._parameter_value | sql_quote }} = 'CTR'                  THEN ${ctr}
-      WHEN {{ metric_selector._parameter_value | sql_quote }} = 'REACH_DV360'          THEN ${reach_dv360_m}
-      WHEN {{ metric_selector._parameter_value | sql_quote }} = 'REACH_META'           THEN ${reach_meta_m}
-      WHEN {{ metric_selector._parameter_value | sql_quote }} = 'VIDEO_VIEWS'          THEN ${video_views_m}
-      WHEN {{ metric_selector._parameter_value | sql_quote }} = 'COMPLETE_VIDEO_VIEWS' THEN ${complete_video_views_m}
+      WHEN REPLACE({% parameter metric_selector %}, "\\'", "") = 'SPENDS'               THEN ${spends_m}
+      WHEN REPLACE({% parameter metric_selector %}, "\\'", "") = 'IMPRESSIONS'          THEN ${impressions_m}
+      WHEN REPLACE({% parameter metric_selector %}, "\\'", "") = 'CLICKS'               THEN ${clicks_m}
+      WHEN REPLACE({% parameter metric_selector %}, "\\'", "") = 'CTR'                  THEN ${ctr}
+      WHEN REPLACE({% parameter metric_selector %}, "\\'", "") = 'REACH_DV360'          THEN ${reach_dv360_m}
+      WHEN REPLACE({% parameter metric_selector %}, "\\'", "") = 'REACH_META'           THEN ${reach_meta_m}
+      WHEN REPLACE({% parameter metric_selector %}, "\\'", "") = 'VIDEO_VIEWS'          THEN ${video_views_m}
+      WHEN REPLACE({% parameter metric_selector %}, "\\'", "") = 'COMPLETE_VIDEO_VIEWS' THEN ${complete_video_views_m}
       ELSE ${spends_m}
     END ;;
   }
+
 
 
   dimension: selected_metric_name {
