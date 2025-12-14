@@ -97,6 +97,11 @@ view: dummy_table_executivesummary {
     type: number
     sql: ${TABLE}.year ;;
   }
+  dimension_group: month {
+    type: time
+    timeframes: [month, year]
+    sql: ${TABLE}.month_date ;;
+  }
   measure: total_spend_tv_digital {
     type: sum
     sql: COALESCE(${tv_spends_inr_cr}, 0)
