@@ -70,7 +70,7 @@ view: digital_paid_dummy_data {
     sql: ${TABLE}.year ;;
   }
   parameter: metric_selector {
-    type: unquoted
+    type: string
     default_value: "SPENDS"
 
     allowed_value: { label: "Spends"                value: "SPENDS" }
@@ -82,21 +82,24 @@ view: digital_paid_dummy_data {
     allowed_value: { label: "Video Views"           value: "VIDEO_VIEWS" }
     allowed_value: { label: "Complete Video Views"  value: "COMPLETE_VIDEO_VIEWS" }
   }
+
+
   measure: selected_metric {
     type: number
     sql:
     CASE
-      WHEN {% parameter metric_selector %} = "SPENDS"               THEN ${spends_m}
-      WHEN {% parameter metric_selector %} = "IMPRESSIONS"          THEN ${impressions_m}
-      WHEN {% parameter metric_selector %} = "CLICKS"               THEN ${clicks_m}
-      WHEN {% parameter metric_selector %} = "CTR"                  THEN ${ctr}
-      WHEN {% parameter metric_selector %} = "REACH_DV360"          THEN ${reach_dv360_m}
-      WHEN {% parameter metric_selector %} = "REACH_META"           THEN ${reach_meta_m}
-      WHEN {% parameter metric_selector %} = "VIDEO_VIEWS"          THEN ${video_views_m}
-      WHEN {% parameter metric_selector %} = "COMPLETE_VIDEO_VIEWS" THEN ${complete_video_views_m}
+      WHEN '{% parameter metric_selector %}' = 'SPENDS'               THEN ${spends_m}
+      WHEN '{% parameter metric_selector %}' = 'IMPRESSIONS'          THEN ${impressions_m}
+      WHEN '{% parameter metric_selector %}' = 'CLICKS'               THEN ${clicks_m}
+      WHEN '{% parameter metric_selector %}' = 'CTR'                  THEN ${ctr}
+      WHEN '{% parameter metric_selector %}' = 'REACH_DV360'          THEN ${reach_dv360_m}
+      WHEN '{% parameter metric_selector %}' = 'REACH_META'           THEN ${reach_meta_m}
+      WHEN '{% parameter metric_selector %}' = 'VIDEO_VIEWS'          THEN ${video_views_m}
+      WHEN '{% parameter metric_selector %}' = 'COMPLETE_VIDEO_VIEWS' THEN ${complete_video_views_m}
       ELSE ${spends_m}
     END ;;
   }
+
 
   dimension: selected_metric_name {
     type: string
