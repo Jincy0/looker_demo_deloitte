@@ -13,6 +13,7 @@ view: digital_paid_dummy_data {
     type: number
     sql: ${TABLE}.clicks ;;
   }
+
   dimension: complete_video_views {
     type: number
     sql: ${TABLE}.complete_video_views ;;
@@ -68,6 +69,53 @@ view: digital_paid_dummy_data {
     type: number
     sql: ${TABLE}.year ;;
   }
+  measure: impressions_m {
+    type: sum
+    sql: ${TABLE}.impressions ;;
+  }
+  measure: clicks_m {
+    type: sum
+    sql: ${TABLE}.clicks ;;
+    value_format_name: decimal_0
+    drill_fields: [brand, year, platform]
+  }
+  measure: spends_m {
+    type: sum
+    sql: ${TABLE}.spends_inr ;;
+    value_format_name: decimal_2
+  }
+
+  measure: ctr {
+    type: number
+    sql: ${clicks_m} / NULLIF(${impressions_m}, 0) ;;
+    value_format_name: percent_2
+  }
+  measure: reach_dv360_m {
+    type: sum
+    sql: ${TABLE}.reach_dv360 ;;
+    value_format_name: decimal_0
+    drill_fields: [brand, year, platform, region]
+  }
+  measure: reach_meta_m {
+    type: sum
+    sql: ${TABLE}.reach_meta ;;
+    value_format_name: decimal_0
+    drill_fields: [brand, year, platform, region]
+  }
+  measure: video_views_m {
+    type: sum
+    sql: ${TABLE}.video_views ;;
+    value_format_name: decimal_0
+    drill_fields: [brand, year, platform, region]
+  }
+  measure: complete_video_views_m {
+    type: sum
+    sql: ${TABLE}.complete_video_views ;;
+    value_format_name: decimal_0
+    drill_fields: [brand, year, platform, region]
+  }
+
+
   measure: count {
     type: count
   }
