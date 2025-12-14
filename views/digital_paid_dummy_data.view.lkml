@@ -86,17 +86,18 @@ view: digital_paid_dummy_data {
     type: number
     sql:
     CASE
-      WHEN {% parameter metric_selector %} = 'SPENDS'               THEN ${spends_m}
-      WHEN {% parameter metric_selector %} = 'IMPRESSIONS'          THEN ${impressions_m}
-      WHEN {% parameter metric_selector %} = 'CLICKS'               THEN ${clicks_m}
-      WHEN {% parameter metric_selector %} = 'CTR'                  THEN ${ctr}
-      WHEN {% parameter metric_selector %} = 'REACH_DV360'          THEN ${reach_dv360_m}
-      WHEN {% parameter metric_selector %} = 'REACH_META'           THEN ${reach_meta_m}
-      WHEN {% parameter metric_selector %} = 'VIDEO_VIEWS'          THEN ${video_views_m}
-      WHEN {% parameter metric_selector %} = 'COMPLETE_VIDEO_VIEWS' THEN ${complete_video_views_m}
+      WHEN {% parameter metric_selector %} = "SPENDS"               THEN ${spends_m}
+      WHEN {% parameter metric_selector %} = "IMPRESSIONS"          THEN ${impressions_m}
+      WHEN {% parameter metric_selector %} = "CLICKS"               THEN ${clicks_m}
+      WHEN {% parameter metric_selector %} = "CTR"                  THEN ${ctr}
+      WHEN {% parameter metric_selector %} = "REACH_DV360"          THEN ${reach_dv360_m}
+      WHEN {% parameter metric_selector %} = "REACH_META"           THEN ${reach_meta_m}
+      WHEN {% parameter metric_selector %} = "VIDEO_VIEWS"          THEN ${video_views_m}
+      WHEN {% parameter metric_selector %} = "COMPLETE_VIDEO_VIEWS" THEN ${complete_video_views_m}
       ELSE ${spends_m}
     END ;;
   }
+
   dimension: selected_metric_name {
     type: string
     sql:
