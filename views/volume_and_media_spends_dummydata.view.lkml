@@ -60,6 +60,11 @@ view: volume_and_media_spends_dummydata {
     type: string
     sql: ${TABLE}.state_name ;;
   }
+  dimension: state_location {
+    type: location
+    sql_latitude: ${TABLE}.state_lat ;;
+    sql_longitude: ${TABLE}.state_lng ;;
+  }
   dimension: year {
     type: number
     sql: ${TABLE}.year ;;
