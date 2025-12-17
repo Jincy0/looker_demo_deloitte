@@ -12,3 +12,4 @@ persist_with: martech_assets_default_datagroup
 
 explore: dummy_table_executivesummary {}
 explore: digital_paid_dummy_data {}
+explore: spot_distribution_dummy_dataset {}
