@@ -28,6 +28,10 @@ view: sov_dummy_data {
     type: string
     sql: ${TABLE}.Market ;;
   }
+  dimension: category {
+    type: string
+    sql: ${TABLE}.Category ;;
+  }
   dimension: month {
     type: string
     sql: ${TABLE}.Month ;;
