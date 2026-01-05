@@ -93,7 +93,6 @@ view: sov_dummy_data {
     value_format: "0.0%"
   }
 
-
   dimension: month {
     type: string
     sql: ${TABLE}.Month ;;
