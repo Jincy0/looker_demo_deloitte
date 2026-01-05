@@ -88,7 +88,7 @@ view: sov_dummy_data {
     END ;;
   }
   measure: sov_percent_avg {
-    type: average
+    type: max
     sql: ${sov} ;;
     value_format: "0.0%"
   }
