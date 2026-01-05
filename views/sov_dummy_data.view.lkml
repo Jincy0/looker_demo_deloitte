@@ -88,11 +88,11 @@ view: sov_dummy_data {
     END ;;
   }
   measure: sov_percent {
-    label: "SOV %"
     type: max
-    sql: ${sov} ;;
-    value_format: "0.0"
+    sql: ${sov} / 1000 ;;
+    value_format: "0.0%"
   }
+
 
   dimension: month {
     type: string
