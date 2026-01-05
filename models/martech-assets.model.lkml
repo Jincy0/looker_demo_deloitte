@@ -14,3 +14,5 @@ explore: dummy_table_executivesummary {}
 explore: digital_paid_dummy_data {}
 explore: spot_distribution_dummy_dataset {}
 explore: volume_and_media_spends_dummydata {}
+explore: grp_dummy_data{}
+explore: sov_dummy_data {}
