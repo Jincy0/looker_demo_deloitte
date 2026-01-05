@@ -20,9 +20,9 @@ view: sov_dummy_data {
     datatype: date
     sql: ${TABLE}.date ;;
   }
-  dimension: grps {
+  dimension: sov {
     type: number
-    sql: ${TABLE}.GRPs ;;
+    sql: ${TABLE}.SOV ;;
   }
   dimension: market {
     type: string
@@ -32,6 +32,68 @@ view: sov_dummy_data {
     type: string
     sql: ${TABLE}.Category ;;
   }
+  parameter: sov_view_selector {
+    type: string
+    default_value: "Month"
+
+    allowed_value: {
+      label: "SOV by Month"
+      value: "Month"
+    }
+
+    allowed_value: {
+      label: "SOV by Category"
+      value: "Category"
+    }
+
+    allowed_value: {
+      label: "SOV by Brand"
+      value: "Brand"
+    }
+
+    allowed_value: {
+      label: "SOV by Advertiser"
+      value: "Advertiser"
+    }
+  }
+  dimension: sov_dynamic_dimension {
+    label: "SOV View"
+    type: string
+
+    sql:
+    CASE
+      WHEN {% parameter sov_view_selector %} = 'Month'
+        THEN CAST(${date_month} AS STRING)
+
+      WHEN {% parameter sov_view_selector %} = 'Category'
+      THEN ${category}
+
+      WHEN {% parameter sov_view_selector %} = 'Brand'
+      THEN ${brand}
+
+      WHEN {% parameter sov_view_selector %} = 'Advertiser'
+      THEN ${advertiser}
+      END ;;
+  }
+  dimension: sov_dynamic_sort {
+    hidden: yes
+    type: number
+
+    sql:
+    CASE
+      WHEN {% parameter sov_view_selector %} = 'Month'
+        THEN EXTRACT(YEAR FROM ${date_month}) * 100
+           + EXTRACT(MONTH FROM ${date_month})
+      ELSE NULL
+    END ;;
+  }
+  measure: sov_percent_avg {
+    type: average
+    sql: ${sov} ;;
+    value_format: "0.0%"
+  }
+
+
   dimension: month {
     type: string
     sql: ${TABLE}.Month ;;
