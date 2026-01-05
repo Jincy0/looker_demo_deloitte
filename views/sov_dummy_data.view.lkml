@@ -89,7 +89,7 @@ view: sov_dummy_data {
   }
   measure: sov_percent {
     type: max
-    sql: ${sov} / 1000 ;;
+    sql: ${sov} / 10000 ;;
     value_format: "0.0%"
   }
 
