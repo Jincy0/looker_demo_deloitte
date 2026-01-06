@@ -26,3 +26,28 @@ explore: grp_dummy_data{
 }
 explore: sov_dummy_data {}
 explore: tv_reach_comparison_dummy {}
+explore: tv_planned_delivered_dummy {}
+explore: digital_planned_delivered_dummy {}
+explore: campaign_calendar_dummy {
+  label: "Planned vs Delivered"
+
+  join: digital_planned_delivered_dummy {
+    type: left_outer
+    relationship: many_to_one
+    sql_on:
+      ${campaign_calendar_dummy.brand} = ${digital_planned_delivered_dummy.brand}
+      AND ${campaign_calendar_dummy.market} = ${digital_planned_delivered_dummy.market}
+      AND ${campaign_calendar_dummy.start_month} =
+          ${digital_planned_delivered_dummy.month_year_month} ;;
+  }
+
+  join: tv_planned_delivered_dummy {
+    type: left_outer
+    relationship: many_to_one
+    sql_on:
+      ${campaign_calendar_dummy.brand} = ${tv_planned_delivered_dummy.brand}
+      AND ${campaign_calendar_dummy.market} = ${tv_planned_delivered_dummy.market}
+      AND ${campaign_calendar_dummy.start_month} =
+          ${tv_planned_delivered_dummy.month_year_month} ;;
+  }
+}
