@@ -2,6 +2,7 @@ view: digital_planned_delivered_dummy {
   sql_table_name: `martech-assets.Dummy_looker_data.digital_planned_delivered_dummy` ;;
 
   dimension: brand {
+    primary_key: yes
     type: string
     sql: ${TABLE}.brand ;;
   }
