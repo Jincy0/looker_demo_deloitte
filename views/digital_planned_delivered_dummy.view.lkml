@@ -2,10 +2,21 @@ view: digital_planned_delivered_dummy {
   sql_table_name: `martech-assets.Dummy_looker_data.digital_planned_delivered_dummy` ;;
 
   dimension: brand {
-    primary_key: yes
     type: string
     sql: ${TABLE}.brand ;;
   }
+  dimension: planned_delivered_pk {
+    primary_key: yes
+    hidden: yes
+    type: string
+    sql:
+    CONCAT(
+      ${TABLE}.brand, '-',
+      ${TABLE}.market, '-',
+      CAST(${TABLE}.month_year AS STRING)
+    ) ;;
+  }
+
   dimension: delivered_clicks {
     type: number
     sql: ${TABLE}.delivered_clicks ;;
