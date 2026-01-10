@@ -2,9 +2,27 @@ view: tv_planned_delivered_dummy {
   sql_table_name: `martech-assets.Dummy_looker_data.tv_planned_delivered_dummy` ;;
 
   dimension: brand {
+    hidden: yes
     type: string
     sql: ${TABLE}.brand ;;
   }
+  dimension: brand_display {
+    label: "Brand"
+    type: string
+    sql:
+    CASE ${TABLE}.brand
+      WHEN 'CHARGED' THEN 'Brand 1'
+      WHEN 'COCA COLA' THEN 'Brand 2'
+      WHEN 'COCA COLA ZERO' THEN 'Brand 3'
+      WHEN 'FANTA' THEN 'Brand 4'
+      WHEN 'LIMCA' THEN 'Brand 5'
+      WHEN 'MAAZA' THEN 'Brand 6'
+      WHEN 'SPRITE' THEN 'Brand 7'
+      WHEN 'THUMS UP' THEN 'Brand 8'
+      ELSE 'Other'
+    END ;;
+  }
+
   dimension: delivered_grps {
     type: number
     sql: ${TABLE}.delivered_grps ;;
