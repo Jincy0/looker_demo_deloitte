@@ -22,7 +22,17 @@ view: tv_planned_delivered_dummy {
       ELSE 'Other'
     END ;;
   }
-
+  dimension: planned_delivered_pk {
+    primary_key: yes
+    hidden: yes
+    type: string
+    sql:
+    CONCAT(
+      ${TABLE}.brand, '-',
+      ${TABLE}.market, '-',
+      CAST(${TABLE}.month_year AS STRING)
+    ) ;;
+  }
   dimension: delivered_grps {
     type: number
     sql: ${TABLE}.delivered_grps ;;
